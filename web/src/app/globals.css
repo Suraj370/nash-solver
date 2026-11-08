@@ -1,0 +1,133 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@theme inline {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --font-heading: var(--font-sans);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-rule: var(--rule);
+  --color-signal: var(--signal);
+  --color-signal-foreground: var(--signal-foreground);
+  --color-signal-soft: var(--signal-soft);
+  --color-signal-ink: var(--signal-ink);
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-2xl: 0px;
+  --radius-3xl: 0px;
+  --radius-4xl: 0px;
+}
+
+/*
+ * One paper, one ink, one signal colour.
+ * Ink carries player 1 and all structure; signal carries player 2 and every
+ * "this is the thing" moment. Nothing else gets colour.
+ */
+:root {
+  --background: oklch(1 0 0);
+  --foreground: oklch(0.17 0.01 90);
+  --card: oklch(0.985 0.002 90);
+  --card-foreground: var(--foreground);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--foreground);
+  --primary: var(--foreground);
+  --primary-foreground: var(--background);
+  --secondary: oklch(0.94 0.008 90);
+  --secondary-foreground: var(--foreground);
+  --muted: oklch(0.94 0.008 90);
+  --muted-foreground: oklch(0.46 0.01 90);
+  --accent: oklch(0.94 0.008 90);
+  --accent-foreground: var(--foreground);
+  --destructive: oklch(0.55 0.22 27);
+  --border: oklch(0.84 0.01 90);
+  --input: oklch(0.84 0.01 90);
+  --ring: var(--signal);
+  --rule: var(--foreground);
+  --signal: oklch(0.87 0.175 96);
+  --signal-ink: oklch(0.48 0.105 88);
+  --signal-foreground: oklch(0.17 0.01 90);
+  --signal-soft: oklch(0.955 0.085 100);
+  --radius: 0px;
+  color-scheme: light;
+}
+
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    @apply font-sans antialiased;
+    scroll-behavior: smooth;
+    scroll-padding-top: 4.5rem;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: var(--signal);
+    color: var(--signal-foreground);
+  }
+  :focus-visible {
+    outline: 2px solid var(--signal);
+    outline-offset: 2px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* Small-caps instrument label used for every section and field title. */
+@utility label {
+  @apply font-mono text-[11px] leading-none font-medium tracking-[0.12em] text-muted-foreground uppercase;
+}
+
+@utility num {
+  @apply font-mono tabular-nums;
+}
+
+@layer components {
+  /* Matrix cell input: no chrome, centred tabular numerals. */
+  .cell-input {
+    @apply num w-full min-w-0 bg-transparent px-1 py-3 text-center text-[15px] text-foreground outline-none;
+    -moz-appearance: textfield;
+  }
+  .cell-input:focus {
+    background: var(--signal-soft);
+    outline: none;
+  }
+  .cell-input[aria-invalid="true"] {
+    color: var(--destructive);
+    text-decoration: underline wavy;
+  }
+}

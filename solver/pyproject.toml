@@ -1,0 +1,17 @@
+[project]
+name = "nashsolver"
+version = "0.1.0"
+description = "Nash equilibrium solvers for two-player games: support enumeration and Lemke-Howson, with step traces and benchmarks."
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = ["numpy>=2.0"]
+
+[dependency-groups]
+dev = ["pytest>=8", "matplotlib>=3.9"]
+
+[build-system]
+requires = ["uv_build>=0.11.24,<0.12.0"]
+build-backend = "uv_build"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
