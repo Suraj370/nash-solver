@@ -2,6 +2,8 @@
 
 Find every Nash equilibrium of a two-player game. Two solvers written from scratch (support enumeration and Lemke-Howson), a FastAPI service, and a web UI that shows the pivots and the pruned supports. Every speed claim is a measured number.
 
+**Live:** https://nash-solver.vercel.app (API: https://nash-solver-api.onrender.com, free tier, so the first request after idle can take up to a minute)
+
 ```
 solver/       Python package: games, checker, both algorithms, tests
 api/          FastAPI service exposing /solve, /presets, /benchmarks
