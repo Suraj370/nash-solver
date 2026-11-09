@@ -21,7 +21,9 @@ from nashsolver.lemke_howson import LemkeHowsonError
 from pydantic import BaseModel, Field, field_validator
 
 MAX_DIM = 8
-BENCH_FILE = Path(__file__).resolve().parents[2] / "benchmarks" / "results" / "benchmarks.json"
+BENCH_FILE = Path(
+    os.environ.get("BENCHMARKS_FILE", Path(__file__).resolve().parents[2] / "benchmarks" / "results" / "benchmarks.json")
+)
 
 app = FastAPI(title="Nash Solver API", version="0.1.0")
 app.add_middleware(

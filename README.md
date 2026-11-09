@@ -21,6 +21,15 @@ cd web && pnpm install && pnpm dev
 
 Open http://localhost:3000. The web app reads `NEXT_PUBLIC_API_URL` (default `http://localhost:8000`).
 
+## Deploy
+
+The API ships as a Docker image (built from the repo root) and the web app deploys separately.
+
+1. **API on Render.** New > Blueprint, pick this repo (`render.yaml`). After the first deploy, set `CORS_ORIGINS` to the web app's URL.
+2. **Web on Vercel.** Import the repo, set the root directory to `web`, and add `NEXT_PUBLIC_API_URL` set to the Render URL. It is read at build time, so redeploy after changing it.
+
+The free Render tier sleeps after about 15 minutes idle, so the first request can take up to a minute.
+
 ## Test and benchmark
 
 ```bash
